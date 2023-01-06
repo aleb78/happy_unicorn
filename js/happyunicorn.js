@@ -16,7 +16,7 @@ const sketch = (p) => {
   
   p.draw = () => {
     p.background(p.color("#caf0f8"));
-    unicorn.emotion='angry';
+    unicorn.emotion='sad';
     unicorn.draw(p);
     
   };

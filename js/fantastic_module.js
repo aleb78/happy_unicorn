@@ -130,6 +130,17 @@ export class Unicorn {
         p.line(this.#headx,this.#heady-15,this.#headx-15,this.#heady-25);
         break;
 
+        case 'sad':
+          p.fill(p.color("#000000"));
+          p.ellipse(this.#headx+10,this.#heady-15, 10, 10);
+          p.ellipse(this.#headx-10,this.#heady-15, 10, 10);
+          p.fill(p.color("#1dc9ec"));
+          p.noStroke();
+          p.ellipse(this.#headx+10,this.#heady-5, 3, 3);
+          p.ellipse(this.#headx+10,this.#heady, 3, 3);
+          p.Stroke();
+               
+          break;
         
       default:
         break;
