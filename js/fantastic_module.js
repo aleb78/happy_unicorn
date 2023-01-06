@@ -7,14 +7,15 @@
 export class Unicorn {
   #headx;
   #heady;
-  emotion;
+  variants = ['normal', 'happy','tired', 'hungry', 'hot', 'cold', 'sad','angry']; 
+  
   constructor(x, y, scale = 1) {
     this.x     = x;
     this.y     = y;
     this.scale = scale;
     this.#headx = (x - 40);
     this.#heady = (y - 50);
-    this.emotion = "normal";
+    this.emotion = 'normal';
   }
 
   #draw_body(p){
@@ -105,15 +106,46 @@ export class Unicorn {
 
   #draw_eyes(p,emotion) {
     switch(emotion) {
-      case "normal":
-      default:
+      case 'normal':
         p.fill(p.color("#000000"));
         p.ellipse(this.#headx+10,this.#heady-15, 10, 10);
         p.ellipse(this.#headx-10,this.#heady-15, 10, 10);
         break;
+
+      case 'tired':
+        p.textSize(14);
+        p.fill(p.color("#000000"));
+        p.line(this.#headx+15,this.#heady-15, this.#headx+5,this.#heady-15)
+        p.line(this.#headx-15,this.#heady-15, this.#headx-5,this.#heady-15)
+        p.text('Z', this.#headx+25,this.#heady-45);
+        p.text('Z', this.#headx+35,this.#heady-55);
+        p.text('Z', this.#headx+45,this.#heady-65);
+        break;
+        
+      case 'angry':
+        p.fill(p.color("#ff0000"));
+        p.ellipse(this.#headx+10,this.#heady-15, 10, 10);
+        p.ellipse(this.#headx-10,this.#heady-15, 10, 10);
+        p.line(this.#headx,this.#heady-15,this.#headx+15,this.#heady-25);
+        p.line(this.#headx,this.#heady-15,this.#headx-15,this.#heady-25);
+        break;
+
+        
+      default:
+        break;
     }
   }
 
+  set emotion(value) {
+    if (this.variants.includes(value)) {
+      this._emotion = value;
+    }
+  }  
+  get emotion() {
+      return this._emotion;
+  }
+  
+  
   draw(p) {
     p.translate(this.x*(1-this.scale),this.y*(1-this.scale));
     p.scale(this.scale);
