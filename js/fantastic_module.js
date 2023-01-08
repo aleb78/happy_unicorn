@@ -7,8 +7,9 @@
 export class Unicorn {
   #headx;
   #heady;
-  variants = ['normal', 'happy','tired', 'hungry', 'hot', 'cold', 'sad','angry']; 
-  
+  variants = ['tired', 'hungry', 'hot', 'cold', 'sad'];
+  #all_variants = this.variants.concat(['normal', 'happy', 'angry']);
+  actions = [];
   constructor(x, y, scale = 1) {
     this.x     = x;
     this.y     = y;
@@ -138,17 +139,30 @@ export class Unicorn {
           p.noStroke();
           p.ellipse(this.#headx+10,this.#heady-5, 3, 3);
           p.ellipse(this.#headx+10,this.#heady, 3, 3);
-          p.Stroke();
-               
+          p.stroke("#000000");       
           break;
         
+          case 'hungry':
+            p.noStroke();
+            p.fill(p.color("#bde0fe"));
+            p.rect(this.#headx+5,this.#heady-25,10,15);
+            p.rect(this.#headx-15,this.#heady-25,10,15);
+            p.fill(p.color("#ffcad4"));
+            p.triangle(this.#headx+5,this.#heady-25, this.#headx+15,this.#heady-25, this.#headx+5,this.#heady-15);
+            p.triangle(this.#headx-5,this.#heady-25, this.#headx-15,this.#heady-25, this.#headx-5,this.#heady-15);
+            p.fill(p.color("#fff952"));
+            p.triangle(this.#headx+15,this.#heady-20, this.#headx+15,this.#heady-10, this.#headx+10,this.#heady-10);
+            p.triangle(this.#headx-15,this.#heady-20, this.#headx-15,this.#heady-10, this.#headx-10,this.#heady-10);
+            p.stroke("#000000"); 
+            break;
+
       default:
         break;
     }
   }
 
   set emotion(value) {
-    if (this.variants.includes(value)) {
+    if (this.#all_variants.includes(value)) {
       this._emotion = value;
     }
   }  
@@ -156,6 +170,14 @@ export class Unicorn {
       return this._emotion;
   }
   
+  move(p,x,y) {
+    this.x = x;
+    this.y = y;
+    this.#headx = (x - 40);
+    this.#heady = (y - 50);
+    this.draw(p);
+  }
+
   
   draw(p) {
     p.translate(this.x*(1-this.scale),this.y*(1-this.scale));
