@@ -7,6 +7,8 @@
 export class Unicorn {
   #headx;
   #heady;
+  width_n;
+  height_n;
   variants = ['tired', 'hungry', 'hot', 'cold', 'sad'];
   #all_variants = this.variants.concat(['normal', 'happy', 'angry']);
   actions = [];
@@ -17,6 +19,8 @@ export class Unicorn {
     this.#headx = (x - 40);
     this.#heady = (y - 50);
     this.emotion = 'normal';
+    this.width_n = 200;
+    this.width_h = 270;
   }
 
   #draw_body(p){
